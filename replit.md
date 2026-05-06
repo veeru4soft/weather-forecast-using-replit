@@ -5,8 +5,8 @@ A Ruby on Rails weather forecast app that accepts an address, geocodes it, fetch
 ## Run & Operate
 
 - Workflow: **"Start application"** — runs automatically on boot
-- Command: `cd weather-forecast && SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development`
-- `cd weather-forecast && bundle install` — install gems after changes
+- Command: `SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development`
+- `bundle install` — install gems after changes
 - No API keys needed — uses free Nominatim (OSM) + Open-Meteo APIs
 
 ## Stack
@@ -21,17 +21,19 @@ A Ruby on Rails weather forecast app that accepts an address, geocodes it, fetch
 ## Where things live
 
 ```
-weather-forecast/
+/                                               ← Rails root (repo root)
 ├── app/
-│   ├── controllers/forecasts_controller.rb   — address → geocode → cache → weather
-│   ├── services/geocoding_service.rb         — Nominatim API (lat/lon + zip)
-│   ├── services/weather_service.rb           — Open-Meteo API (current + 7-day)
+│   ├── controllers/forecasts_controller.rb    — address → geocode → cache → weather
+│   ├── services/geocoding_service.rb          — Nominatim API (lat/lon + zip)
+│   ├── services/weather_service.rb            — Open-Meteo API (current + 7-day)
 │   └── views/forecasts/
-│       ├── new.html.erb                       — address input form
-│       └── show.html.erb                      — forecast display + cache badge
+│       ├── new.html.erb                        — address input form
+│       └── show.html.erb                       — forecast display + cache badge
 ├── config/
-│   ├── routes.rb                              — root → forecasts#new, /forecast/show
-│   └── puma.rb                                — binds to 0.0.0.0:PORT
+│   ├── routes.rb                               — root → forecasts#new, /forecast/show
+│   └── puma.rb                                 — binds to 0.0.0.0:PORT
+├── Gemfile / Gemfile.lock
+└── Dockerfile
 ```
 
 ## Architecture decisions
@@ -56,6 +58,7 @@ weather-forecast/
 - `SSL_CERT_FILE` must be set for HTTPS calls to work in Nix/Replit environment
 - Rails binds to `0.0.0.0` via `-b 0.0.0.0` CLI flag so Replit proxy can reach it
 - Port 3000 maps to external port 80
+- Rails project is at the **repo root** (not a subdirectory) — required for Render.com auto-detection
 
 ## User preferences
 
