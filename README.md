@@ -28,7 +28,7 @@ https://weather-forecast-using-replit.onrender.com/
 ## Requirements
 
 - Ruby 3.x
-- Rails 7.x
+- Rails 8.x
 - Redis (optional for production caching)
 - PostgreSQL or SQLite
 
