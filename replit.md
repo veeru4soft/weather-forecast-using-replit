@@ -4,15 +4,15 @@ A Ruby on Rails weather forecast app that accepts an address, geocodes it, fetch
 
 ## Run & Operate
 
-- `cd weather-forecast && PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development` — run the app (workflow: "Start application")
-- `cd weather-forecast && bundle install` — install gems
-- `cd weather-forecast && bundle exec bootsnap precompile --gemfile app/ lib/` — pre-warm bootsnap cache (speeds up boot)
+- Workflow: **"Start application"** — runs automatically on boot
+- Command: `cd weather-forecast && SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development`
+- `cd weather-forecast && bundle install` — install gems after changes
 - No API keys needed — uses free Nominatim (OSM) + Open-Meteo APIs
 
 ## Stack
 
 - Ruby 3.2.2 + Rails 8.1.3
-- Puma 8.0.1 (web server, binds to 0.0.0.0:PORT)
+- Puma 8.0.1 (web server, binds to 0.0.0.0:3000)
 - Rails memory cache store (30-min TTL, keyed by zip code)
 - Geocoding: Nominatim (OpenStreetMap) — free, no key
 - Weather: Open-Meteo — free, no key
@@ -41,6 +41,7 @@ weather-forecast/
 - **No DB**: stateless app — only external APIs + Rails cache
 - **Free APIs only**: Nominatim (OSM) for geocoding, Open-Meteo for weather — no API keys
 - **Service objects**: GeocodingService and WeatherService are plain Ruby classes in app/services/
+- **SSL cert**: `SSL_CERT_FILE` env var points to `/etc/ssl/certs/ca-certificates.crt` for Nix compatibility
 
 ## Product
 
@@ -52,11 +53,10 @@ weather-forecast/
 
 ## Gotchas
 
-- Bootsnap cache pre-warming (`bundle exec bootsnap precompile`) is required before first workflow start or boot is slow
-- Rails binds to `0.0.0.0` via `-b 0.0.0.0` CLI flag (puma.rb `bind` line is a fallback)
-- Workflow outputType: webview, waitForPort: 3000
+- `SSL_CERT_FILE` must be set for HTTPS calls to work in Nix/Replit environment
+- Rails binds to `0.0.0.0` via `-b 0.0.0.0` CLI flag so Replit proxy can reach it
+- Port 3000 maps to external port 80
 
-## Pointers
+## User preferences
 
-- See the `pnpm-workspace` skill for workspace structure details (existing Node.js artifacts)
-- Rails app lives in `weather-forecast/` at the workspace root (separate from pnpm packages)
+- Pure Ruby on Rails only — no Node.js, no JavaScript build tools

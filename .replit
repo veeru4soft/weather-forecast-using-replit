@@ -1,4 +1,4 @@
-modules = ["nodejs-24", "ruby-3.2"]
+modules = ["ruby-3.2"]
 
 [deployment]
 router = "application"
@@ -43,6 +43,10 @@ timeoutMs = 20000
 [[ports]]
 localPort = 3000
 externalPort = 3000
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
 
 [[ports]]
 localPort = 8080
