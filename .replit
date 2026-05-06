@@ -1,4 +1,4 @@
-modules = ["ruby-3.2"]
+modules = ["nodejs-24", "ruby-3.2"]
 
 [deployment]
 router = "application"
