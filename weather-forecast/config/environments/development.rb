@@ -4,6 +4,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Make code changes take effect immediately without server restart.
+  config.hosts << "229f474a-b256-479a-b0af-fae16e8c200f-00-4xbm1hxovu7o.worf.replit.dev"
   config.enable_reloading = true
 
   # Do not eager load code on boot.
