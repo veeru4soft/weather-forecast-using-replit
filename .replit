@@ -29,7 +29,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "cd weather-forecast && SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development"
+args = "cd weather-forecast && PORT=3000 bundle exec rails server -b 0.0.0.0 -p 3000 -e development"
 waitForPort = 3000
 
 [agent]
