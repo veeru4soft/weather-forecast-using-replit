@@ -28,6 +28,15 @@
 
       .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
 
+      footer {
+        text-align: center;
+        padding: 1.25rem;
+        color: #64748b;
+        font-size: 0.8rem;
+        border-top: 1px solid #1e293b;
+        margin-top: 2rem;
+      }
+
       .alert {
         background: #7f1d1d;
         border: 1px solid #ef4444;
@@ -53,5 +62,9 @@
 
       <%= yield %>
     </div>
+
+    <footer>
+      &copy; <%= Date.today.year %> Veerababu. All rights reserved.
+    </footer>
   </body>
 </html>
